@@ -65,7 +65,7 @@ public class CheckLogin extends AsyncTask<String, String, String> {
 	private void loadDetails() {
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("password", password));
-		params.add(new BasicNameValuePair("mobile_number", mobileNumber));
+		params.add(new BasicNameValuePair("userid", mobileNumber));
 		jParser = new JSONParser(mContext);
 		JSONObject json = jParser.makeHttpRequest(urlToGetDetails, "GET",params);
 		Log.d("response", json.toString());

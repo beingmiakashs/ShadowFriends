@@ -59,7 +59,7 @@ import com.omelet.shadowdriends.location.GlobalLocation;
 import com.omelet.shadowfriends.util.GlobalConstant;
 import com.omelet.shadowfriends.util.Network;
 
-public class CreatePackAcrivity extends FragmentActivity implements
+public class CreateWalkWithMeAcrivity extends FragmentActivity implements
 		OnMapLongClickListener {
 
 	private GoogleMap googleMap;
@@ -68,8 +68,8 @@ public class CreatePackAcrivity extends FragmentActivity implements
 	public double sourceLon;
 	private double pickupLat;
 	private double pickupLon;
-	private double receiverLat;
-	private double receiverLon;
+	private double destinationLat;
+	private double destinationLon;
 	private int actionSeq = 1;
 	private Marker senderMarker = null;
 	private Marker receiverMarker = null;
@@ -105,7 +105,7 @@ public class CreatePackAcrivity extends FragmentActivity implements
 		netCheck = new Network(this);
 		boolean networkStatus = netCheck.isNetworkConnected();
 		
-		GlobalConstant.showMessage(CreatePackAcrivity.this,"Press long on a place in the map which is your pack pickup location");
+		GlobalConstant.showMessage(CreateWalkWithMeAcrivity.this,"Press long on a place in the map which is your pickup location");
 
 		if (networkStatus == false) {
 			setContentView(R.layout.no_internet);
@@ -181,24 +181,25 @@ public class CreatePackAcrivity extends FragmentActivity implements
 					public void onClick(View v) {
 						if(actionSeq==1){
 							if(senderMarker==null){
-								GlobalConstant.showMessage(CreatePackAcrivity.this, "Press long on a place in the map which is your pack pickup location");
+								GlobalConstant.showMessage(CreateWalkWithMeAcrivity.this, "Press long on a place in the map which is your pickup location");
 							}
 							else{
-								GlobalConstant.showMessage(CreatePackAcrivity.this, "Press long on a place in the map which is your pack receiver location");
+								GlobalConstant.showMessage(CreateWalkWithMeAcrivity.this, "Press long on a place in the map which is your destination location");
 								actionSeq = 2;
+								nextAction.setText("Confirm your destination location.");
 							}
 						}
 						if(actionSeq==2){
 							if(receiverMarker==null){
-								GlobalConstant.showMessage(CreatePackAcrivity.this, "Press long on a place in the map which is your pack receiver location");
+								GlobalConstant.showMessage(CreateWalkWithMeAcrivity.this, "Press long on a place in the map which is your destination location");
 							}
 							else{
-								Intent i = new Intent(CreatePackAcrivity.this, SubmitNewPack.class);
+								Intent i = new Intent(CreateWalkWithMeAcrivity.this, SubmitWalkWithMe.class);
 								i.putExtra(GlobalConstant.TAG_SENDER_LAT, pickupLat);
 								i.putExtra(GlobalConstant.TAG_SENDER_LON, pickupLon);
-								i.putExtra(GlobalConstant.TAG_RECEIVER_LAT, receiverLat);
-								i.putExtra(GlobalConstant.TAG_RECEIVER_LON, receiverLat);
-								Log.d("intent data", pickupLat+" "+pickupLon+" "+receiverLat+" "+receiverLon);
+								i.putExtra(GlobalConstant.TAG_RECEIVER_LAT, destinationLat);
+								i.putExtra(GlobalConstant.TAG_RECEIVER_LON, destinationLat);
+								Log.d("intent data", pickupLat+" "+pickupLon+" "+destinationLat+" "+destinationLon);
 								startActivity(i);
 								finish();
 							}
@@ -246,10 +247,10 @@ public class CreatePackAcrivity extends FragmentActivity implements
 	private void createMarker(LatLng point) {
 		String title="";
 		if(actionSeq==1){
-			title = "Pickup location of the pack"; 
+			title = "Pickup location of the user"; 
 		}
 		else if(actionSeq==2){
-			title = "Receiver location of the pack"; 
+			title = "Destination of this user journey"; 
 		}
 		MarkerOptions markerOptions = new MarkerOptions();
 		markerOptions.position(point);
@@ -269,9 +270,9 @@ public class CreatePackAcrivity extends FragmentActivity implements
 		else if(actionSeq==2){
 			if(receiverMarker!=null)receiverMarker.remove();
 			receiverMarker = tempMarker;
-			receiverLat = point.latitude;
-			receiverLon = point.longitude;
-			Log.d("receiver location", receiverLat+" "+receiverLon);
+			destinationLat = point.latitude;
+			destinationLon = point.longitude;
+			Log.d("receiver location", destinationLat+" "+destinationLon);
 		}
 	}
 
@@ -326,7 +327,7 @@ public class CreatePackAcrivity extends FragmentActivity implements
 		protected void onPreExecute() {
 			super.onPreExecute();
 
-			gps = new GPSTracker(CreatePackAcrivity.this);
+			gps = new GPSTracker(CreateWalkWithMeAcrivity.this);
 		}
 
 		/**

@@ -10,21 +10,25 @@
     <string name="app_id">1397110090516441</string>
     
     <string-array name="nav_drawer_items">
-        <item >Home</item>
-        <item >Pickers</item>
-        <item >My packs</item>
-        <item >New Pack</item>
-        <item >Delivered</item>
+        <item >Safe Zone</item>
+        <item >Danger Map</item>
+        <item >Raise Voice</item>
+        <item >Walk With Me Request</item>
+        <item >Walk With Me</item>
+        <item >Track Me</item>
+        <item >Emergency</item>
         <item >Logout</item>
     </string-array>
     
     <!-- List Item Icons(Images) with strings(text of company name) -->
     <array name="nav_drawer_icons">
         <item>@drawable/icon_home</item>
-        <item>@drawable/picker</item>
-        <item>@drawable/my_pack</item>
-        <item>@drawable/new_pack</item>
-        <item>@drawable/delivered</item>
+        <item>@drawable/danger</item>
+        <item>@drawable/raise</item>
+        <item>@drawable/wwm</item>
+        <item>@drawable/wwm</item>
+        <item>@drawable/track</item>
+        <item>@drawable/emergency_d</item>
         <item>@drawable/logout</item>
     </array>
 

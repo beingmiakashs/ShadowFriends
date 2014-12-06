@@ -24,6 +24,7 @@ public final class GlobalConstant {
 	public static final String KEY_DISTANCE = "distance";
 	
 	public static final String USER_ID = "USER_ID";
+	public static final String LOGIN_ACCESSTOKEN = "ACCESSTOKEN";
 	public static final String LOGIN_STATUS = "LOGIN_STATUS";
 	public static final String LOGIN_TYPE = "LOGIN_TYPE";
 	public static final String LOGIN_LOCAL = "LOGIN_LOCAL";

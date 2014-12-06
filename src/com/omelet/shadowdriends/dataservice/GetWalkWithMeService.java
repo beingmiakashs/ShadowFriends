@@ -17,8 +17,9 @@ import com.omelet.shadowfriends.util.OnTaskCompleted;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
-public class SubmitPackService extends AsyncTask<String, String, String> {
+public class GetWalkWithMeService extends AsyncTask<String, String, String> {
 
 	private Context mContext;
 	private ProgressDialog pDialog;
@@ -46,7 +47,7 @@ public class SubmitPackService extends AsyncTask<String, String, String> {
 	
 	
 	
-	public SubmitPackService(Context mContext, OnTaskCompleted mListener,
+	public GetWalkWithMeService(Context mContext, OnTaskCompleted mListener,
 			String mobileNumber, String receiverMobileNumber, double senderLat,
 			double senderLon, double receiverLat, double receiverLon,
 			String title, String des, String senderAddress,
@@ -86,16 +87,12 @@ public class SubmitPackService extends AsyncTask<String, String, String> {
 	private void loadDetails() {
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("userid", mobileNumber));
-		params.add(new BasicNameValuePair("startlat", String.valueOf(senderLat)));
-		params.add(new BasicNameValuePair("startlng", String.valueOf(senderLon)));
-		params.add(new BasicNameValuePair("deslat", String.valueOf(receiverLat)));
-		params.add(new BasicNameValuePair("deslng", String.valueOf(receiverLon)));
-		params.add(new BasicNameValuePair("title", title));
-		params.add(new BasicNameValuePair("desc", des));
+		params.add(new BasicNameValuePair("access_token", title));
 		jParser = new JSONParser(mContext);
 		JSONObject json = jParser.makeHttpRequest(urlToGetDetails, "GET",
 				params);
-		try {
+		Log.d("All walk with me: ", json.toString());
+		/*try {
 			if (json == null) {
 				isSuccess = false;
 				return;
@@ -111,7 +108,7 @@ public class SubmitPackService extends AsyncTask<String, String, String> {
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	protected void onPostExecute(String file_url) {

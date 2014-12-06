@@ -135,7 +135,14 @@ public class DetailsSafeZoneActivity extends FragmentActivity implements
 				des = (TextView) findViewById(R.id.des);
 				callButton = (Button) findViewById(R.id.Call);
 				
+				itemTitle = getIntent().getStringExtra(LoadSafeZonesList.TAG_NAME);
+				itemDes = getIntent().getStringExtra(LoadSafeZonesList.TAG_ADDRESS);
+				title.setText(itemTitle);
+				des.setText(itemDes);
+				
 				phoneNumber = getIntent().getStringExtra(LoadSafeZonesList.TAG_PHONE);
+				Log.d("phone numer",phoneNumber);
+				
 				callButton.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View arg0) {
@@ -166,8 +173,7 @@ public class DetailsSafeZoneActivity extends FragmentActivity implements
 				v2GetRouteDirection = new GMapV2GetRouteDirection();
 				polyLine = null;
 
-				itemTitle = getIntent().getStringExtra(LoadSafeZonesList.TAG_NAME);
-				itemDes = getIntent().getStringExtra(LoadSafeZonesList.TAG_ADDRESS);
+				
 
 			}
 		}

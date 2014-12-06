@@ -24,7 +24,9 @@ import android.widget.ListView;
 
 import com.omelet.shadowdriends.R;
 import com.omelet.shadowdriends.adapter.NavDrawerListAdapter;
-import com.omelet.shadowdriends.createpack.CreatePackAcrivity;
+import com.omelet.shadowdriends.createpack.CreateWalkWithMeAcrivity;
+import com.omelet.shadowdriends.createpack.DangerMapAcrivity;
+import com.omelet.shadowdriends.createpack.ShowWalkWithMeAcrivity;
 import com.omelet.shadowdriends.model.NavDrawerItem;
 import com.omelet.shadowfriends.util.GlobalConstant;
 import com.sromku.simple.fb.Permission;
@@ -85,6 +87,8 @@ public class MainActivity extends FragmentActivity {
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[3], navMenuIcons.getResourceId(3, -1)));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[4], navMenuIcons.getResourceId(4, -1)));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(7, -1)));
 		
 
 		// Recycle array
@@ -202,20 +206,21 @@ public class MainActivity extends FragmentActivity {
 			fragmentID = 0;
 			break;
 		case 1:
-			fragment = new PickersListFragment();
+			in = new Intent(getApplicationContext(), DangerMapAcrivity.class);
+			startActivity(in);
 			fragmentID = 1;
 			break;
 		case 2:
-			//fragment = new MyPackListFragment();
 			fragmentID = 2;
 			break;
 		case 3:
 			fragmentID = 3;
-			in = new Intent(getApplicationContext(), CreatePackAcrivity.class);
+			in = new Intent(getApplicationContext(), CreateWalkWithMeAcrivity.class);
 			startActivity(in);
 			break;
 		case 4:
-			//fragment = new DeliveredListFragment();
+			in = new Intent(getApplicationContext(), ShowWalkWithMeAcrivity.class);
+			startActivity(in);
 			fragmentID = 4;
 			break;
 		case 5:
@@ -296,6 +301,8 @@ public class MainActivity extends FragmentActivity {
 				Log.e("facebook", "Logout successfull");
 				
 				editor.putString(GlobalConstant.LOGIN_STATUS, GlobalConstant.LOGIN_STATUS_SIGNOUT);
+				editor.putString(GlobalConstant.USER_ID, "");
+				editor.putString(GlobalConstant.LOGIN_ACCESSTOKEN, "");
 				editor.commit();
 				GlobalConstant.showMessage(MainActivity.this, "Logout successfull");
 				Intent in = new Intent(getApplicationContext(), LoginActivity.class);

@@ -68,12 +68,22 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.omelet.shadowdriends.createpack.CreatePackAcrivity"
-            android:label="New Pack"
+            android:name="com.omelet.shadowdriends.createpack.CreateWalkWithMeAcrivity"
+            android:label="Walk With Me Request"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name="com.omelet.shadowdriends.createpack.SubmitNewPack"
+            android:name="com.omelet.shadowdriends.createpack.ShowWalkWithMeAcrivity"
+            android:label="Show Walk With Me"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.omelet.shadowdriends.createpack.DangerMapAcrivity"
+            android:label="Danger Map"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name="com.omelet.shadowdriends.createpack.SubmitWalkWithMe"
             android:label="New Pack"
             android:screenOrientation="portrait" >
         </activity>
@@ -84,7 +94,7 @@
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
-        
+                
         <!-- Map API key meta data -->
         <meta-data
             android:name="com.google.android.gms.version"

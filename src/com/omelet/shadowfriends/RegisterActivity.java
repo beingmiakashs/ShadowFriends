@@ -51,7 +51,7 @@ public class RegisterActivity extends Activity implements OnTaskCompleted {
 					return;
 				}
 				if(netCheck.isNetworkConnected()){
-					createAccount = new CreateAccount(RegisterActivity.this, RegisterActivity.this, firstName.getText().toString(), lastName.getText().toString(), pid.getText().toString(), mobileNumber.getText().toString(), password.getText().toString(), "http://omleteit.com/apps/pickpack/creatUser.php");
+					createAccount = new CreateAccount(RegisterActivity.this, RegisterActivity.this, firstName.getText().toString(), lastName.getText().toString(), pid.getText().toString(), mobileNumber.getText().toString(), password.getText().toString(), "http://www.omleteit.com/apps/shadow/CreateUser.php");
 					createAccount.execute();
 				}
 				else{

@@ -3,12 +3,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/hajj_bg_blue" >
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -37,7 +31,7 @@
                     android:id="@+id/title"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#000000"
                     android:textSize="20dip"
                     android:textStyle="bold" />
                 
@@ -45,14 +39,14 @@
                     android:id="@+id/currentStatus"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#000000"
                     android:textSize="15dip"/>
 
                 <TextView
                     android:id="@+id/des"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#FFFFFF"
+                    android:textColor="#000000"
                     android:textSize="15dip" />
 
                 <LinearLayout
@@ -62,15 +56,16 @@
 
                     <Button
                         android:id="@+id/Call"
-                        style="@style/ButtonText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:background="@drawable/btn_blue"
-                        android:text="Call"
+                        android:text="Call to get the security help"
                         android:textAlignment="center" >
+
                     </Button>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
 
 </LinearLayout>

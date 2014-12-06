@@ -22,7 +22,10 @@ import com.omelet.shadowfriends.util.OnTaskCompleted;
 import com.sromku.simple.fb.Permission;
 import com.sromku.simple.fb.SimpleFacebook;
 import com.sromku.simple.fb.SimpleFacebookConfiguration;
+import com.sromku.simple.fb.entities.Profile;
 import com.sromku.simple.fb.listeners.OnLoginListener;
+import com.sromku.simple.fb.listeners.OnProfileListener;
+import com.sromku.simple.fb.utils.Utils;
 
 public class LoginActivity extends Activity implements OnTaskCompleted {
     private EditText userIDEditText;
@@ -44,6 +47,7 @@ public class LoginActivity extends Activity implements OnTaskCompleted {
         setContentView(R.layout.login);
         
         GlobalConstant.mContext = this;
+        Log.d("hash key", Utils.getHashKey(this));
         
         netCheck = new Network(this);
         preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
@@ -74,7 +78,7 @@ public class LoginActivity extends Activity implements OnTaskCompleted {
 					return;
 				}
 				if(netCheck.isNetworkConnected()){
-					checkLogin = new CheckLogin(LoginActivity.this, LoginActivity.this, password.getText().toString(), userIDEditText.getText().toString(), "http://omleteit.com/apps/pickpack/checkLogin.php");
+					checkLogin = new CheckLogin(LoginActivity.this, LoginActivity.this, password.getText().toString(), userIDEditText.getText().toString(), "http://www.omleteit.com/apps/shadow/checkLogin.php");
 					checkLogin.execute();
 				}
 				else{
@@ -96,8 +100,7 @@ public class LoginActivity extends Activity implements OnTaskCompleted {
         	    Permission.USER_FRIENDS,
         	    Permission.USER_ABOUT_ME,
         	    Permission.PUBLIC_PROFILE,
-        	    Permission.EMAIL,
-        	    Permission.PUBLISH_ACTION
+        	    Permission.EMAIL
         	};
         SimpleFacebookConfiguration configuration = new SimpleFacebookConfiguration.Builder()
         .setAppId("1397110090516441")
@@ -123,6 +126,25 @@ public class LoginActivity extends Activity implements OnTaskCompleted {
 	} 
 
 	private void setLogin() {
+		
+		final OnProfileListener onProfileListener = new OnProfileListener() {         
+		    @Override
+		    public void onComplete(Profile profile) {
+		        Log.i("Facebook profile", "My profile id = " + profile.getId());
+		        Log.i("Facebook access token", "Access token = " + mSimpleFacebook.getSession().getAccessToken());
+
+				editor.putString(GlobalConstant.LOGIN_STATUS, GlobalConstant.LOGIN_STATUS_SIGNIN);
+				editor.putString(GlobalConstant.LOGIN_TYPE, GlobalConstant.LOGIN_FB);
+				editor.putString(GlobalConstant.USER_ID, profile.getId());
+				editor.putString(GlobalConstant.LOGIN_ACCESSTOKEN, mSimpleFacebook.getSession().getAccessToken());
+				editor.commit();
+				
+				Intent i = new Intent(getApplicationContext(), MainActivity.class);
+				startActivity(i);
+				finish();
+		    }
+		};
+		
 		// Login listener
 		final OnLoginListener onLoginListener = new OnLoginListener() {
 
@@ -143,14 +165,7 @@ public class LoginActivity extends Activity implements OnTaskCompleted {
 			@Override
 			public void onLogin() {
 				Log.e("facebook", "login success");
-				editor.putString(GlobalConstant.LOGIN_STATUS, GlobalConstant.LOGIN_STATUS_SIGNIN);
-				editor.putString(GlobalConstant.LOGIN_TYPE, GlobalConstant.LOGIN_FB);
-				editor.putString(GlobalConstant.USER_ID, userIDEditText.getText().toString());
-				editor.commit();
-				
-				Intent i = new Intent(getApplicationContext(), MainActivity.class);
-				startActivity(i);
-				finish();
+				mSimpleFacebook.getProfile(onProfileListener);
 			}
 
 			@Override
