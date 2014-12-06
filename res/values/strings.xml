@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ShadowFriends</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="description_list_icon">Item Icon</string>
+    <string name="str_atv_places">Enter place</string>
+    
+    <string-array name="nav_drawer_items">
+        <item >Home</item>
+        <item >Pickers</item>
+        <item >My packs</item>
+        <item >New Pack</item>
+        <item >Delivered</item>
+        <item >Logout</item>
+    </string-array>
+    
+    <!-- List Item Icons(Images) with strings(text of company name) -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/icon_home</item>
+        <item>@drawable/picker</item>
+        <item>@drawable/my_pack</item>
+        <item>@drawable/new_pack</item>
+        <item>@drawable/delivered</item>
+        <item>@drawable/logout</item>
+    </array>
+
+</resources>
