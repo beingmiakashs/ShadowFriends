@@ -2,27 +2,18 @@ package com.omelet.shadowfriends;
 
 import java.util.ArrayList;
 
-import com.omelet.sa.pickmypack.R;
-import com.omelet.shadowdriends.adapter.NavDrawerListAdapter;
-import com.omelet.shadowdriends.createpack.CreatePackAcrivity;
-import com.omelet.shadowdriends.model.NavDrawerItem;
-import com.omelet.shadowfriends.util.GlobalConstant;
-
-import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-/*import android.app.Fragment;
-import android.app.FragmentManager;*/
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
@@ -30,6 +21,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import com.omelet.shadowdriends.R;
+import com.omelet.shadowdriends.adapter.NavDrawerListAdapter;
+import com.omelet.shadowdriends.createpack.CreatePackAcrivity;
+import com.omelet.shadowdriends.model.NavDrawerItem;
+import com.omelet.shadowfriends.util.GlobalConstant;
+import com.sromku.simple.fb.Permission;
+import com.sromku.simple.fb.SimpleFacebook;
+import com.sromku.simple.fb.SimpleFacebookConfiguration;
+import com.sromku.simple.fb.listeners.OnLogoutListener;
 
 public class MainActivity extends FragmentActivity {
 	
@@ -52,6 +53,8 @@ public class MainActivity extends FragmentActivity {
 	private SharedPreferences preferences;
 	private Editor editor;
 	private int fragmentID;
+	private OnLogoutListener onLogoutListener;
+	private SimpleFacebook mSimpleFacebook;
 
 	@SuppressLint("NewApi")
 	@Override
@@ -118,6 +121,30 @@ public class MainActivity extends FragmentActivity {
 		/*if (savedInstanceState == null) {
 			  displayView(0);
 		}*/
+		
+		Permission[] permissions = new Permission[] {
+        	    Permission.USER_PHOTOS,
+        	    Permission.USER_FRIENDS,
+        	    Permission.USER_ABOUT_ME,
+        	    Permission.EMAIL,
+        	    Permission.PUBLISH_ACTION
+        	};
+        SimpleFacebookConfiguration configuration = new SimpleFacebookConfiguration.Builder()
+        .setAppId("1397110090516441")
+        .setNamespace("infinity_codewin")
+        .setPermissions(permissions)
+        .build();
+        SimpleFacebook.setConfiguration(configuration);
+        
+        mSimpleFacebook = SimpleFacebook.getInstance();
+        setLogout();
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		mSimpleFacebook = SimpleFacebook.getInstance(this);
 	}
 	
 	/**
@@ -179,7 +206,7 @@ public class MainActivity extends FragmentActivity {
 			fragmentID = 1;
 			break;
 		case 2:
-			fragment = new MyPackListFragment();
+			//fragment = new MyPackListFragment();
 			fragmentID = 2;
 			break;
 		case 3:
@@ -188,17 +215,14 @@ public class MainActivity extends FragmentActivity {
 			startActivity(in);
 			break;
 		case 4:
-			fragment = new DeliveredListFragment();
+			//fragment = new DeliveredListFragment();
 			fragmentID = 4;
 			break;
 		case 5:
 			fragmentID = 5;
-			editor.putString(GlobalConstant.LOGIN_STATUS, GlobalConstant.LOGIN_STATUS_SIGNOUT);
-			editor.commit();
-			GlobalConstant.showMessage(MainActivity.this, "Signout successfull");
-			in = new Intent(getApplicationContext(), LoginActivity.class);
-			startActivity(in);
-			finish();
+
+			mSimpleFacebook.logout(onLogoutListener);
+			
 			break;
 
 		default:
@@ -239,6 +263,7 @@ public class MainActivity extends FragmentActivity {
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		mSimpleFacebook.onActivityResult(this, requestCode, resultCode, data);
 		Log.d("get activity result","get data");
 		if(resultCode==RESULT_OK){
 			//super.onActivityResult(requestCode, resultCode, data);
@@ -247,6 +272,38 @@ public class MainActivity extends FragmentActivity {
 			finish();
 			startActivity(in);
 		}
+	}
+	
+	private void setLogout() {
+		onLogoutListener = new OnLogoutListener() {
+
+			@Override
+			public void onFail(String reason) {
+				Log.w("FacebookLogout", "Failed to login");
+			}
+
+			@Override
+			public void onException(Throwable throwable) {
+				Log.e("FacebookLogout", "Bad thing happened", throwable);
+			}
+
+			@Override
+			public void onThinking() {
+			}
+
+			@Override
+			public void onLogout() {
+				Log.e("facebook", "Logout successfull");
+				
+				editor.putString(GlobalConstant.LOGIN_STATUS, GlobalConstant.LOGIN_STATUS_SIGNOUT);
+				editor.commit();
+				GlobalConstant.showMessage(MainActivity.this, "Logout successfull");
+				Intent in = new Intent(getApplicationContext(), LoginActivity.class);
+				startActivity(in);
+				finish();
+			}
+
+		};
 	}
 
 }

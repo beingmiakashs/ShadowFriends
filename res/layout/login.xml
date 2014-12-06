@@ -89,6 +89,15 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dip"
                 android:text="Login" />
+            
+            <ImageButton
+                android:id="@+id/btnFbLogin"
+                android:background="@drawable/fb_connect"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dip"
+                android:text="Login" />
+            
             <!-- Link to Registration Screen -->
 
             <TextView
@@ -98,7 +107,7 @@
                 android:layout_marginBottom="40dip"
                 android:layout_marginTop="40dip"
                 android:gravity="center"
-                android:text="New to PickMyPack? Register here"
+                android:text="New to ShadowFriends? Register here"
                 android:textColor="#0b84aa"
                 android:textSize="20dip" />
         </LinearLayout>

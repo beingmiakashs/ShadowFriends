@@ -1,18 +1,17 @@
 package com.omelet.shadowfriends;
 
-import com.omelet.sa.pickmypack.R;
-import com.omelet.shadowdriends.dataservice.CreateAccount;
-import com.omelet.shadowfriends.util.GlobalConstant;
-import com.omelet.shadowfriends.util.Network;
-import com.omelet.shadowfriends.util.OnTaskCompleted;
-
 import android.app.Activity;
-import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.omelet.shadowdriends.R;
+import com.omelet.shadowdriends.dataservice.CreateAccount;
+import com.omelet.shadowfriends.util.GlobalConstant;
+import com.omelet.shadowfriends.util.Network;
+import com.omelet.shadowfriends.util.OnTaskCompleted;
 
 public class RegisterActivity extends Activity implements OnTaskCompleted {
     private TextView loginScreen;
@@ -42,7 +41,6 @@ public class RegisterActivity extends Activity implements OnTaskCompleted {
         confirmPassword = (EditText) findViewById(R.id.reg_password_confrim);
         loginScreen = (TextView) findViewById(R.id.link_to_login);
         registerBtn = (Button) findViewById(R.id.btnRegister);
-        mobileNumber.setRawInputType(Configuration.KEYBOARD_QWERTY);
         
         registerBtn.setOnClickListener(new View.OnClickListener() {
 			

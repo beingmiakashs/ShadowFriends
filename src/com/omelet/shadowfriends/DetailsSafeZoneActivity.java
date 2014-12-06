@@ -7,13 +7,10 @@ import java.util.Locale;
 
 import org.w3c.dom.Document;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -28,13 +25,10 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import br.com.dina.ui.widget.UITableView;
-import br.com.dina.ui.widget.UITableView.ClickListener;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -53,18 +47,16 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.omelet.shadowdriends.R;
-import com.omelet.shadowdriends.dataservice.AssignCarrier;
-import com.omelet.shadowdriends.dataservice.UpdateStatus;
+import com.omelet.shadowdriends.dataservice.LoadSafeZonesList;
 import com.omelet.shadowdriends.location.GPSTracker;
 import com.omelet.shadowdriends.location.GlobalLocation;
 import com.omelet.shadowdriends.model.RequestDetails;
 import com.omelet.shadowfriends.util.GMapV2GetRouteDirection;
 import com.omelet.shadowfriends.util.GlobalConstant;
 import com.omelet.shadowfriends.util.Network;
-import com.omelet.shadowfriends.util.OnTaskCompleted;
 
-public class DetailsActivity extends FragmentActivity implements
-		OnMarkerClickListener, OnTaskCompleted {
+public class DetailsSafeZoneActivity extends FragmentActivity implements
+		OnMarkerClickListener{
 
 	private GoogleMap googleMap;
 	private GPSTracker gps;
@@ -91,7 +83,6 @@ public class DetailsActivity extends FragmentActivity implements
 	public ArrayList<Marker> markerList = new ArrayList();
 	private Network netCheck;
 	public boolean networkStatus;
-	private String itemRid;
 	private String itemTitle;
 	private String itemDes;
 	private RequestDetails requestDetails;
@@ -103,11 +94,11 @@ public class DetailsActivity extends FragmentActivity implements
 	private PhoneStateListener listener;
 	private TextView currentStatus;
 	private String actionType;
-	private Button actionButtonOne;
-	private Button actionButtonTwo;
+	private Button callButton;
 	private int owner;
 	private SharedPreferences preferences;
 	private boolean isFirstCall = false;
+	private String phoneNumber;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -129,7 +120,7 @@ public class DetailsActivity extends FragmentActivity implements
 				}
 			});
 		} else {
-			setContentView(R.layout.details_activity);
+			setContentView(R.layout.details_safezone_activity);
 
 			int status = GooglePlayServicesUtil
 					.isGooglePlayServicesAvailable(getBaseContext());
@@ -142,12 +133,15 @@ public class DetailsActivity extends FragmentActivity implements
 				title = (TextView) findViewById(R.id.title);
 				currentStatus = (TextView) findViewById(R.id.currentStatus);
 				des = (TextView) findViewById(R.id.des);
-				actionButtonOne = (Button) findViewById(R.id.actionOne);
-				actionButtonTwo = (Button) findViewById(R.id.actionTwo);
-				actionType = getIntent().getStringExtra(
-						GlobalConstant.ACTION_TYPE);
-				owner = getIntent().getIntExtra(GlobalConstant.PACK_OWNER, 4);
-				setButtonAction();
+				callButton = (Button) findViewById(R.id.Call);
+				
+				phoneNumber = getIntent().getStringExtra(LoadSafeZonesList.TAG_PHONE);
+				callButton.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View arg0) {
+						makeCall(phoneNumber);
+					}
+				});
 
 				SupportMapFragment fm = (SupportMapFragment) getSupportFragmentManager()
 						.findFragmentById(R.id.map);
@@ -172,116 +166,11 @@ public class DetailsActivity extends FragmentActivity implements
 				v2GetRouteDirection = new GMapV2GetRouteDirection();
 				polyLine = null;
 
-				/*itemRid = getIntent().getStringExtra(FetchDetails.TAG_RID);
-				itemTitle = getIntent().getStringExtra(FetchDetails.TAG_TITLE);
-				itemDes = getIntent().getStringExtra(FetchDetails.TAG_DES);*/
+				itemTitle = getIntent().getStringExtra(LoadSafeZonesList.TAG_NAME);
+				itemDes = getIntent().getStringExtra(LoadSafeZonesList.TAG_ADDRESS);
+
 			}
 		}
-	}
-
-	private void setButtonAction() {
-		Log.d("action button",actionType+" "+owner+" "+preferences.getString(GlobalConstant.USER_ID, "**"));
-		if(actionType.equals(GlobalConstant.ACTION_REQUESTING)  && owner==1){
-		}
-		else if (actionType.equals(GlobalConstant.ACTION_ACCEPTING)  && owner==3) {
-			actionButtonOne.setText("Accept Request");
-			actionButtonTwo.setText("Decline");
-		} else if (actionType.equals(GlobalConstant.ACTION_CARRYNG)  && owner==3) {
-			actionButtonOne.setText("Handover Pack");
-			actionButtonTwo.setVisibility(View.GONE);
-		} else if (actionType.equals(GlobalConstant.ACTION_CONFIRMANTION) && owner==2) {
-			actionButtonOne.setText("Confirm Delivery");
-			actionButtonTwo.setVisibility(View.GONE);
-		}
-		else{
-			actionButtonOne.setVisibility(View.GONE);
-			actionButtonTwo.setVisibility(View.GONE);
-		}
-		actionButtonOne.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				String mobileNumber = preferences.getString(GlobalConstant.USER_ID, "");
-				Log.d("button click",actionType);
-				if (actionType.equals(GlobalConstant.ACTION_REQUESTING)) {
-					AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailsActivity.this);
-					alertDialog.setTitle("Carrier Mobile Number");
-
-					alertDialog.setMessage("Enter carrier registered mobile number");
-					final EditText input = new EditText(DetailsActivity.this);
-					input.setRawInputType(Configuration.KEYBOARD_QWERTY);
-					LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-							LinearLayout.LayoutParams.MATCH_PARENT,
-							LinearLayout.LayoutParams.MATCH_PARENT);
-					input.setLayoutParams(lp);
-					alertDialog.setView(input);
-					alertDialog.setPositiveButton("Assign carrier",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,
-										int which) {
-									String carrierMobileNumber = input.getText().toString();
-									String urlToGetDetails = "http://omleteit.com/apps/pickpack/assignCarrier.php";
-									if (carrierMobileNumber.compareTo("")!=0) {
-										AssignCarrier assignCarrier = new AssignCarrier(DetailsActivity.this, DetailsActivity.this,
-												itemRid, carrierMobileNumber, preferences.getString(GlobalConstant.USER_ID, ""),
-												urlToGetDetails);
-										assignCarrier.execute();
-									}
-									else{
-										GlobalConstant.showMessage(DetailsActivity.this, "Enter a valid mobile number");
-									}
-								}
-							});
-					alertDialog.setNegativeButton("Cancel",
-							new DialogInterface.OnClickListener() {
-								public void onClick(DialogInterface dialog,int which) {
-									dialog.cancel();
-								}
-							});
-					alertDialog.show();
-				} else if (actionType.equals(GlobalConstant.ACTION_ACCEPTING)) {
-					new UpdateStatus(DetailsActivity.this,
-							DetailsActivity.this, itemRid,
-							GlobalConstant.ACTION_CARRYNG, mobileNumber,
-							"http://omleteit.com/apps/pickpack/updateRequest.php")
-							.execute();
-				} else if (actionType.equals(GlobalConstant.ACTION_CARRYNG)) {
-					new UpdateStatus(DetailsActivity.this,
-							DetailsActivity.this, itemRid,
-							GlobalConstant.ACTION_CONFIRMANTION, mobileNumber,
-							"http://omleteit.com/apps/pickpack/updateRequest.php")
-							.execute();
-				} else if (actionType
-						.equals(GlobalConstant.ACTION_CONFIRMANTION)) {
-					new UpdateStatus(DetailsActivity.this,
-							DetailsActivity.this, itemRid,
-							GlobalConstant.ACTION_DELIVERED, mobileNumber,
-							"http://omleteit.com/apps/pickpack/updateRequest.php")
-							.execute();
-				}
-			}
-		});
-		actionButtonTwo.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				String mobileNumber = preferences.getString(
-						GlobalConstant.USER_ID, "");
-				if (actionType.equals(GlobalConstant.ACTION_REQUESTING)) {
-					new UpdateStatus(DetailsActivity.this,
-							DetailsActivity.this, itemRid,
-							GlobalConstant.ACTION_DECLINE, mobileNumber,
-							"http://omleteit.com/apps/pickpack/updateRequest.php")
-							.execute();
-				} else if (actionType.equals(GlobalConstant.ACTION_ACCEPTING)) {
-					new UpdateStatus(DetailsActivity.this,
-							DetailsActivity.this, itemRid,
-							GlobalConstant.ACTION_DECLINE, mobileNumber,
-							"http://omleteit.com/apps/pickpack/updateRequest.php")
-							.execute();
-				}
-			}
-		});
 	}
 
 	@Override
@@ -333,7 +222,7 @@ public class DetailsActivity extends FragmentActivity implements
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			gps = new GPSTracker(DetailsActivity.this);
+			gps = new GPSTracker(DetailsSafeZoneActivity.this);
 		}
 
 		protected String doInBackground(String... args) {
@@ -473,83 +362,6 @@ public class DetailsActivity extends FragmentActivity implements
 		}
 	}
 
-	@Override
-	public void onTaskCompleted(String status) {
-		if(status.equals(GlobalConstant.ACTION_ASSIGN_CARRIER) || status.equals(GlobalConstant.ACTION_UPDATE)){
-			Log.d("get update", "hello");
-			setResult(RESULT_OK, null);
-			finish();
-		}
-		
-		title.setText(requestDetails.getTitle());
-		currentStatus.setText(requestDetails.getCurrentStatus());
-		des.setText(requestDetails.getDes());
-		numberList = (UITableView) findViewById(R.id.numberList);
-		createList();
-		numberList.commit();
-
-		loadMapBack = new LoadMapBack();
-		loadMapBack.execute();
-	}
-
-	private void createList() {
-		CustomClickListener listener = new CustomClickListener();
-		numberList.setClickListener(listener);
-		populateNumberList();
-	}
-
-	private void populateNumberList() {
-
-		if (requestDetails.getSenderName().length() > 2) {
-			numberList.addBasicItem(R.drawable.user_image, "Sender: "
-					+ requestDetails.getSenderName(),
-					requestDetails.getSenderContactNumber());
-		} else {
-			numberList.addBasicItem(R.drawable.user_image, "Sender",
-					"Not Assigned");
-		}
-
-		if (requestDetails.getReceiverName().length() > 2) {
-			numberList.addBasicItem(R.drawable.user_image, "Receiver: "
-					+ requestDetails.getReceiverName(),
-					requestDetails.getReceiverContactNumber());
-		} else {
-			numberList.addBasicItem(R.drawable.user_image, "Receiver",
-					"Not Assigned");
-		}
-
-		if (requestDetails.getCarrierName().length() > 2) {
-			numberList.addBasicItem(R.drawable.user_image, "Carrier: "
-					+ requestDetails.getCarrierName(),
-					requestDetails.getCarrierContactNumber());
-		} else {
-			numberList.addBasicItem(R.drawable.user_image, "Carrier",
-					"Not Assigned");
-		}
-	}
-
-	private class CustomClickListener implements ClickListener {
-
-		@Override
-		public void onClick(int index) {
-			if (index == 0) {
-				if (requestDetails.getSenderContactNumber().length() > 2) {
-					makeCall(requestDetails.getSenderContactNumber());
-				}
-			}
-			if (index == 1) {
-				if (requestDetails.getReceiverContactNumber().length() > 2) {
-					makeCall(requestDetails.getReceiverContactNumber());
-				}
-			}
-			if (index == 2) {
-				if (requestDetails.getCarrierContactNumber().length() > 2) {
-					makeCall(requestDetails.getCarrierContactNumber());
-				}
-			}
-		}
-	}
-
 	public void makeCall(String number) {
 		String phoneCallUri = "tel:";
 		phoneCallUri += number;
@@ -582,10 +394,5 @@ public class DetailsActivity extends FragmentActivity implements
 		phoneCallIntent.setData(Uri.parse(phoneCallUri));
 		this.startActivity(phoneCallIntent);
 
-	}
-
-	@Override
-	public void showMessage(String message) {
-		GlobalConstant.showMessage(DetailsActivity.this, message);
 	}
 }

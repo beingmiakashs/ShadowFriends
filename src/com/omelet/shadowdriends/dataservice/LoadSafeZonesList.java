@@ -22,7 +22,7 @@ import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 import android.widget.ListView;
 
-public class LoadPacksList extends AsyncTaskLoader<DataHandler> {
+public class LoadSafeZonesList extends AsyncTaskLoader<DataHandler> {
 
 		DataHandler mHaDataHandler;
 		
@@ -41,17 +41,18 @@ public class LoadPacksList extends AsyncTaskLoader<DataHandler> {
 		private double sourceLat;
 		private double sourceLon;
 	    
-		private static final String TAG_STATUS = "status";
-		private static final String TAG_SUCCESS = "success";
-		private static final String TAG_REQUESTS = "requests";
-		private static final String TAG_TITLE = "TITLE";
-		private static final String TAG_DES = "DES";
-		private static final String TAG_RID = "RID";
-		private static final String TAG_OWNER = "OWNER";
-		private static final String TAG_DISTANCE = "DISTANCE";
-		private static final String TAG_CURRENT_STATUS = "CURRENT_STATUS";
+		public static final String TAG_STATUS = "status";
+		public static final String TAG_SUCCESS = "success";
+		public static final String TAG_REQUESTS = "product";
+		public static final String TAG_NAME = "NAME";
+		public static final String TAG_ADDRESS = "ADDRESS";
+		public static final String TAG_PHONE = "PHONE";
+		public static final String TAG_EMAIL = "EMAIL";
+		public static final String TAG_DISTANCE = "DISTANCE";
+		public static final String TAG_LONGITUDE = "LONGITUDE";
+		public static final String TAG_LATITUDE = "LATITUDE";
 
-		public LoadPacksList(Context context, Activity activity, ListView listView) {
+		public LoadSafeZonesList(Context context, Activity activity, ListView listView) {
 			super(context);
 			mContext = context;
 			mActivity = activity;
@@ -98,9 +99,10 @@ public class LoadPacksList extends AsyncTaskLoader<DataHandler> {
 			}
 	        List<NameValuePair> params = new ArrayList<NameValuePair>();
 	        // getting JSON string from URL
-	        params.add(new BasicNameValuePair("mobile_number", mobileNumber));
-	        params.add(new BasicNameValuePair("latitude", String.valueOf(sourceLat)));
-	        params.add(new BasicNameValuePair("longitude", String.valueOf(sourceLon)));
+	        params.add(new BasicNameValuePair("type", "14"));
+	        params.add(new BasicNameValuePair("Latitude", String.valueOf(sourceLat)));
+	        params.add(new BasicNameValuePair("Longitude", String.valueOf(sourceLon)));
+	        params.add(new BasicNameValuePair("Radious", "10000"));
 	        jParser = new JSONParser(mContext);
 	        JSONObject json = jParser.makeHttpRequest(urlToGetAllPacks, "GET", params);
 	        Log.d("All packs: ", json.toString());
@@ -113,29 +115,23 @@ public class LoadPacksList extends AsyncTaskLoader<DataHandler> {
 	        	}
 	        	
 	            // Checking for SUCCESS TAG
-	            String status = json.getString(TAG_STATUS);
+	            int status = json.getInt(TAG_SUCCESS);
 
-	            if (status.equals(TAG_SUCCESS)) {
+	            if (status==1) {
 	            	isSuccess = true;
 	                packs = json.getJSONArray(TAG_REQUESTS);
 	                
 	                for (int i = 0; i < packs.length(); i++) {
 	                    JSONObject nearItem = packs.getJSONObject(i);
-
-	                    // Storing each json item in variable
-	                    String title = nearItem.getString(TAG_TITLE);
-	                    String des = nearItem.getString(TAG_DES);
-	                    String rid = nearItem.getString(TAG_RID);
-	                    int owner = nearItem.getInt(TAG_OWNER);
-	                    int distance = nearItem.getInt(TAG_DISTANCE);
 	                    
 	                    PackItem packItem = new PackItem();
-	                    packItem.setPackTitle(title);
-	                    packItem.setPackDescription(des);
-	                    packItem.setRid(rid);
-	                    packItem.setOwner(owner);
-	                    packItem.setDistance(distance);
-	                    packItem.setCurrentStatus(nearItem.getString(TAG_CURRENT_STATUS));
+	                    packItem.setName(nearItem.getString(TAG_NAME));
+	                    packItem.setAddress(nearItem.getString(TAG_ADDRESS));
+	                    packItem.setPhone(nearItem.getString(TAG_PHONE));
+	                    packItem.setEmail(nearItem.getString(TAG_EMAIL));
+	                    packItem.setLat(Double.valueOf(nearItem.getString(TAG_LATITUDE)));
+	                    packItem.setLon(Double.valueOf(nearItem.getString(TAG_LONGITUDE)));
+	                    packItem.setDistance(nearItem.getInt(TAG_DISTANCE));
 	                    
 	                    packsList.add(packItem);
 	                }

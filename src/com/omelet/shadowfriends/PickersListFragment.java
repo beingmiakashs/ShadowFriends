@@ -1,39 +1,30 @@
 package com.omelet.shadowfriends;
 
-import java.util.Calendar;
-
-import com.omelet.sa.pickmypack.R;
-import com.omelet.shadowdriends.adapter.PacksListAdapter;
-import com.omelet.shadowdriends.adapter.PickersListAdapter;
-import com.omelet.shadowdriends.dataservice.DataHandler;
-import com.omelet.shadowdriends.dataservice.FetchDetails;
-import com.omelet.shadowdriends.dataservice.LoadPacksList;
-import com.omelet.shadowdriends.dataservice.LoadPickersList;
-import com.omelet.shadowdriends.dataservice.PickerListDataHandler;
-import com.omelet.shadowdriends.location.GPSTracker;
-import com.omelet.shadowdriends.model.PackItem;
-import com.omelet.shadowdriends.model.PickerItem;
-import com.omelet.shadowfriends.util.GlobalConstant;
-import com.omelet.shadowfriends.util.Network;
-
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.Loader;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v4.app.ListFragment;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.ListFragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.Loader;
+import android.telephony.PhoneStateListener;
+import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.omelet.shadowdriends.R;
+import com.omelet.shadowdriends.adapter.PickersListAdapter;
+import com.omelet.shadowdriends.dataservice.LoadPickersList;
+import com.omelet.shadowdriends.dataservice.PickerListDataHandler;
+import com.omelet.shadowdriends.model.PickerItem;
+import com.omelet.shadowfriends.util.GlobalConstant;
+import com.omelet.shadowfriends.util.Network;
 
 public class PickersListFragment extends ListFragment implements LoaderManager.LoaderCallbacks<PickerListDataHandler>{
 	private PickersListAdapter adapter;

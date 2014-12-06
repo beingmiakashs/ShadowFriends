@@ -23,8 +23,11 @@ public final class GlobalConstant {
 	public static final String KEY_LATITUDE = "latitude";
 	public static final String KEY_DISTANCE = "distance";
 	
-	public static final String USER_MOBILE_NUMBER = "USER_MOBILE_NUMBER";
+	public static final String USER_ID = "USER_ID";
 	public static final String LOGIN_STATUS = "LOGIN_STATUS";
+	public static final String LOGIN_TYPE = "LOGIN_TYPE";
+	public static final String LOGIN_LOCAL = "LOGIN_LOCAL";
+	public static final String LOGIN_FB = "LOGIN_FB";
 	public static final String LOGIN_STATUS_SIGNIN = "SIGNIN";
 	public static final String LOGIN_STATUS_SIGNOUT = "SIGNOUT";
 	

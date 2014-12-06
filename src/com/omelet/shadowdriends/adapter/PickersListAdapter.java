@@ -1,21 +1,17 @@
 package com.omelet.shadowdriends.adapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
-import com.omelet.sa.pickmypack.R;
-import com.omelet.shadowdriends.model.PackItem;
-import com.omelet.shadowdriends.model.PickerItem;
-import com.omelet.shadowfriends.util.GlobalConstant;
- 
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.omelet.shadowdriends.R;
+import com.omelet.shadowdriends.model.PickerItem;
  
 public class PickersListAdapter extends BaseAdapter {
  

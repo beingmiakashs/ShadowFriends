@@ -1,21 +1,19 @@
 package com.omelet.shadowdriends.createpack;
 
-import java.util.List;
-
-import com.omelet.sa.pickmypack.R;
-import com.omelet.shadowdriends.dataservice.SubmitPackService;
-import com.omelet.shadowfriends.util.GlobalConstant;
-import com.omelet.shadowfriends.util.OnTaskCompleted;
-
-import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.omelet.shadowdriends.R;
+import com.omelet.shadowdriends.dataservice.SubmitPackService;
+import com.omelet.shadowfriends.util.GlobalConstant;
+import com.omelet.shadowfriends.util.OnTaskCompleted;
 
 public class SubmitNewPack extends Activity implements OnTaskCompleted {
 	
@@ -50,7 +48,7 @@ public class SubmitNewPack extends Activity implements OnTaskCompleted {
 		btnDelete.setVisibility(View.INVISIBLE);
 		btnDelete.setEnabled(false);
 		preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-		mobileNumber = preferences.getString(GlobalConstant.USER_MOBILE_NUMBER, "");
+		mobileNumber = preferences.getString(GlobalConstant.USER_ID, "");
 		urlToGetDetails = "http://omleteit.com/apps/pickpack/creatRequest.php";
 		
 		title = (EditText) findViewById(R.id.title);

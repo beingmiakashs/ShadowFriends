@@ -2,7 +2,8 @@ package com.omelet.shadowdriends.adapter;
 
 import java.util.ArrayList;
 
-import com.omelet.sa.pickmypack.R;
+
+import com.omelet.shadowdriends.R;
 import com.omelet.shadowdriends.model.NavDrawerItem;
 
 import android.app.Activity;

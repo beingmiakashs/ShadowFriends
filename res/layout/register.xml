@@ -66,7 +66,7 @@
 		  <TextView android:layout_width="fill_parent"
 		  		android:layout_height="wrap_content"
 		  		android:textColor="#372c24"
-		  		android:text="Citizen card/Driving/Passport number"/>
+		  		android:text="NID/Driving/Passport number"/>
 		  <EditText android:id="@+id/reg_id" 
 		  		android:layout_width="fill_parent"
 		  		android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
 		  <TextView android:layout_width="fill_parent"
 		  		android:layout_height="wrap_content"
 		  		android:textColor="#372c24"
-		  		android:text="mobile number"/>
+		  		android:text="username"/>
 		  <EditText android:id="@+id/reg_mobile_number" 
 		  		android:layout_width="fill_parent"
 		  		android:layout_height="wrap_content"

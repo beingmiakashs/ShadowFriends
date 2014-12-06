@@ -2,19 +2,15 @@ package com.omelet.shadowdriends.model;
 
 public class PackItem {
 	
-	private String rid;
-	private String packTitle;
-	private String packDescription;
+	private String name;
+	private String address;
+	private String phone;
 	private int distance;
-	private String currentStatus;
-	private int owner;
 	
-	public String getCurrentStatus() {
-		return currentStatus;
-	}
-	public void setCurrentStatus(String currentStatus) {
-		this.currentStatus = currentStatus;
-	}
+	private String email;
+	private double lon;
+	private double lat;
+	
 	public int getDistance() {
 		return distance;
 	}
@@ -22,28 +18,40 @@ public class PackItem {
 		this.distance = distance;
 	}
 	
-	public String getRid() {
-		return rid;
+	public String getName() {
+		return name;
 	}
-	public void setRid(String rid) {
-		this.rid = rid;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getPackTitle() {
-		return packTitle;
+	public String getAddress() {
+		return address;
 	}
-	public void setPackTitle(String packTitle) {
-		this.packTitle = packTitle;
+	public void setAddress(String address) {
+		this.address = address;
 	}
-	public String getPackDescription() {
-		return packDescription;
+	public String getPhone() {
+		return phone;
 	}
-	public void setPackDescription(String packDescription) {
-		this.packDescription = packDescription;
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
-	public int getOwner() {
-		return owner;
+	public String getEmail() {
+		return email;
 	}
-	public void setOwner(int owner) {
-		this.owner = owner;
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public double getLon() {
+		return lon;
+	}
+	public void setLon(double lon) {
+		this.lon = lon;
+	}
+	public double getLat() {
+		return lat;
+	}
+	public void setLat(double lat) {
+		this.lat = lat;
 	}
 }
