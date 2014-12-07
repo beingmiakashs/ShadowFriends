@@ -38,7 +38,6 @@ public class SubmitWalkWithMe extends Activity implements OnTaskCompleted {
 	private String mobileNumber;
 	private String urlToGetDetails;
 	private SubmitPackService submitPack;
-	
 	private GetWalkWithMeService getWalkWithMe;
 
 	@Override
