@@ -36,10 +36,12 @@
         <item >Walk With Me Request</item>
         <item >Walk With Me</item>
         <item >Track Me</item>
-        <item >Emergency</item>
-        <item >Evidence</item>
+        <item >Emergency Settings</item>
+        <item >Secret Eye</item>
         <item >Harassment Statistics</item>
         <item >Basic Info</item>
+        <item >FIR</item>
+        <item >Survey</item>
         <item >Logout</item>
     </string-array>
     
@@ -48,14 +50,50 @@
         <item>@drawable/safe_zone</item>
         <item>@drawable/danger</item>
         <item>@drawable/raise</item>
-        <item>@drawable/wwm</item>
+        <item>@drawable/wwm1</item>
         <item>@drawable/wwm</item>
         <item>@drawable/track</item>
         <item>@drawable/emergency_d</item>
-        <item>@drawable/emergency_d</item>
-        <item>@drawable/emergency_d</item>
-        <item>@drawable/emergency_d</item>
+        <item>@drawable/evidence</item>
+        <item>@drawable/stat</item>
+        <item>@drawable/info</item>
+        <item>@drawable/info</item>
+        <item>@drawable/survey</item>
         <item>@drawable/logout</item>
     </array>
 
+    
+        <string name="titlePost">Story of Victims</string>
+    <string name="comment">Your Comment: </string>
+
+    <string name="question_option">women are mostly victim </string>
+    <string name="question_next">Next </string>
+    <string name="question_previous">Previous </string>
+    
+
+
+    <string name="required">Required</string>
+
+    <string name="post_prompt">Select a category</string>
+    <string-array name="post_type_arrays">
+        <item>Suggestion</item>
+        <item>Incidents</item>
+        <item>Awareness</item>
+
+
+    </string-array>
+
+    
+     <string name="comment">When you mostly face harassment? </string>
+
+    <string name="question_option">women  </string>
+
+    <string name="question_option1">Day </string>
+    <string name="question_option2">Night </string>
+    <string name="question_option3">Noon </string>
+
+    <string name="question_next">Next </string>
+    <string name="question_previous">Previous </string>
+    
+    
 </resources>

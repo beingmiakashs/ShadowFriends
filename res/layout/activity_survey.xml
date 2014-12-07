@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical"
+              android:background="@color/Text_white"
+        >
+
+    <LinearLayout
+                  android:layout_width="fill_parent"
+                  android:layout_height="wrap_content"
+                  android:orientation="vertical"
+                  android:background="@color/feed_bg"
+                  android:padding="10dp"
+            >
+
+                <TextView
+                        android:id="@+id/txtQuestion"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/comment"
+                        android:textColor="#000000"
+                    />
+
+        <RadioGroup
+                android:id="@+id/radioQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+            <RadioButton
+                    android:id="@+id/radioQ1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/question_option1"
+                    />
+
+            <RadioButton
+                    android:id="@+id/radioQ2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/question_option2"
+                    />
+
+            <RadioButton
+                    android:id="@+id/radioQ3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/question_option3"
+                    android:checked="true" />
+
+
+
+        </RadioGroup>
+
+
+        <!--  ListRow Left sied Thumbnail image -->
+        <RelativeLayout
+                android:id="@+id/thumbnail"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dip"
+                android:layout_alignParentLeft="true"
+                android:background="@color/feed_bg"
+                android:layout_marginRight="5dip" >
+
+            <Button
+                    android:id="@+id/btnNext"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/question_next"
+                    android:layout_alignParentLeft="true"
+                    />
+
+
+
+            <Button
+                    android:id="@+id/btnPrevious"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/question_previous"
+                    android:layout_alignParentRight="true"
+
+
+                    />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+
+
+
+    </LinearLayout>

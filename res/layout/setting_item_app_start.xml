@@ -14,7 +14,7 @@
         android:gravity="left"
         android:inputType="textMultiLine"
         android:paddingLeft="35dip"
-        android:text="Send Emergency SMS on Gear App start" />
+        android:text="Allow tracking me(only me Facebook friends)" />
 
     <CheckBox
         android:id="@+id/appStartCheckBox"

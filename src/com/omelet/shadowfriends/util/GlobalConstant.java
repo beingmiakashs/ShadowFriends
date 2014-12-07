@@ -11,6 +11,54 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public final class GlobalConstant {
+	
+	
+	
+	
+
+	//----------------------------------------------------------------------
+	    public static final String TAG_CONTACTS = "requests";
+
+
+	    public static final String TAG_ID = "userid";
+	    //public static final String TAG_User_ID_value = "anik";
+
+
+	    public static final String TAG_REQ_FID = "fid";
+
+	    public static final String TAG_REQ_TITLE = "title";
+	    public static final String TAG_REQ_DATE = "email";
+	    public static final String TAG_REQ_STATUS = "des";
+	    public static final String TAG_REQ_SUB_STATUS = "label";
+
+	    public static final String TAG_REQ_TOTAL_AGREE = "total_agree";
+	    public static final String TAG_REQ_TOTAL_DISAGREE = "total_disagree";
+
+	    public static final String TAG_REQ_USER_LATITUDE = "lat";
+	    public static final String TAG_REQ_USER_LONGITUDE = "lon";
+
+	    public static final String TAG_FID = "FID";
+	    public static final String TAG_TITLE = "TITLE";
+	    public static final String TAG_DATE = "email";
+	    public static final String TAG_STATUS = "DES";
+	    public static final String TAG_SUB_STATUS = "LABEL";
+
+	    public static final String TAG_TOTAL_AGREE = "TOTAL_AGREE";
+	    public static final String TAG_TOTAL_DISAGREE = "TOTAL_DISAGREE";
+
+	    public static final String TAG_USER_LATITUDE = "LAT";
+	    public static final String TAG_USER_LONGITUDE = "LON";
+
+	    public static String insertCommentUrl=	"http://www.omleteit.com/apps/shadow/comment.php";
+
+
+	    public static String insertVoteUrl= "http://www.omleteit.com/apps/shadow/vote.php?userid=anik&fid=7&action=disagree";
+	    public static String insertPostUrl = "http://www.omleteit.com/apps/shadow/creatPost.php";
+	    public static String getPostUrl = "http://www.omleteit.com/apps/shadow/feedList.php?userid=anik&lat=23.752157&lon=90.390873";
+	    public static String getButtonStatus ="http://www.omleteit.com/apps/shadow/GetSinglePostVote.php?userid=anik&fid=7";
+	    //-------------------------------------------------------
+
+	    
 	public static Context mContext;
 
 	public static final String KEY_STATUS_ON = "on";

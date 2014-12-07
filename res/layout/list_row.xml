@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/list_selector"
+
+                android:orientation="horizontal"
+                android:padding="5dip" >
+
+    <!--  ListRow Left sied Thumbnail image -->
+
+    <!--  NEVER USE BUTTON IN CUSTOMIZED LIST VIEW
+        IT WILL STOP TO YOUR CLICK LISTENER -->
+    <LinearLayout android:id="@+id/thumbnail"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:padding="3dip"
+                  android:layout_alignParentLeft="true"
+
+
+
+                  android:layout_marginLeft="@dimen/feed_item_margin"
+                  android:layout_marginRight="@dimen/feed_item_margin"
+                  android:layout_marginTop="@dimen/feed_item_margin"
+                  android:background="@drawable/bg_parent_rounded_corner"
+                  android:orientation="vertical"
+                  android:paddingBottom="@dimen/feed_item_padding_top_bottom"
+                  android:paddingTop="@dimen/feed_item_padding_top_bottom"
+
+            >
+
+        <ImageView
+                android:id="@+id/list_image"
+                android:layout_width="50dip"
+                android:layout_height="50dip"
+                android:src="@drawable/blog_image"/>
+
+    </LinearLayout>
+    <TextView
+            android:id="@+id/fid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/thumbnail"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:visibility="gone"
+            />
+
+    <!-- Title Of Song-->
+    <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/thumbnail"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:text="Love the way lie"
+            android:textColor="#040404"
+            android:typeface="sans"
+
+
+
+            android:textSize="@dimen/feed_item_profile_name"
+            android:textStyle="bold"
+
+            />
+
+    <!-- Artist Name -->
+    <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+
+            android:layout_marginTop="1dip"
+            android:layout_toRightOf="@+id/thumbnail"
+
+            android:textColor="@color/timestamp"
+            android:text="23 Nove"
+            android:textSize="@dimen/feed_item_timestamp"
+
+
+            />
+
+    <TextView
+            android:id="@+id/txtSub"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtDate"
+            android:textColor="#343434"
+            android:textSize="10dip"
+            android:layout_marginTop="1dip"
+            android:layout_toRightOf="@+id/thumbnail"
+            android:text="I love you xxxxxxxxxxxxxxxxxx" />
+
+
+    <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/txtSub"
+            android:padding="10dp"
+            >
+
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/btn_agree"
+
+                   />
+
+
+        <TextView
+                android:id="@+id/txtCountAgree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#343434"
+                android:text="23"
+                android:padding="4dp"/>
+
+        <ImageView android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/btn_disagree"
+                   android:padding="4dp"
+                />
+
+
+        <TextView
+                android:id="@+id/txtCountDisagree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#343434"
+                android:text="3"
+                android:padding="4dp"/>
+
+    </LinearLayout>
+
+
+    <!-- Rightend Arrow -->
+    <ImageView android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:src="@drawable/arrow"
+               android:layout_alignParentRight="true"
+               android:layout_centerVertical="true"/>
+
+</RelativeLayout>

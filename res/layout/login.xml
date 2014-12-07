@@ -8,27 +8,6 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="#ffffff" >
-
-        <!-- Header  Starts -->
-
-        <LinearLayout
-            android:id="@+id/header"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/header"
-            android:paddingBottom="5dip"
-            android:paddingTop="5dip" >
-<!-- 
-            Logo Start
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dip"
-                android:src="@drawable/logo" />
-            Logo Ends -->
-        </LinearLayout>
-        <!-- Header Ends -->
         <!-- Footer Start -->
 
         <LinearLayout
@@ -44,10 +23,8 @@
         <!-- Login Form -->
 
         <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/header"
             android:orientation="vertical"
             android:padding="10dip" >
 

@@ -1,7 +1,10 @@
 package com.omelet.shadowdriends.emergency;
 
+import java.util.Calendar;
+
 import com.omelet.shadowdriends.R;
 import com.omelet.shadowdriends.createpack.ShowWalkWithMeAcrivity;
+import com.omelet.shadowdriends.track.TrackMeService;
 import com.omelet.shadowfriends.util.GlobalConstant;
 
 import br.com.dina.ui.model.ViewItem;
@@ -12,6 +15,9 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.ContactsContract;
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -41,6 +47,11 @@ public class EmergencyBoard extends Activity {
 	
 	private CheckBox gearAppStartCheck;
 	private CheckBox gearAppButtonPressCheck;
+	
+	private Intent myIntent;
+	private PendingIntent pendingIntent;
+	ProgressDialog dialouge;
+	private AlarmManager alarmManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -109,6 +120,43 @@ public class EmergencyBoard extends Activity {
 		SettingClickListener listener = new SettingClickListener();
 		settingsList.setClickListener(listener);
 		
+		String gearAppStartSettingStatus = preferences.getString(GlobalConstant.KEY_GEAR_APP_START_EMERGENCY, GlobalConstant.KEY_STATUS_NOT_SET);
+		
+		LayoutInflater mInflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		RelativeLayout gearAppStartSettingView = (RelativeLayout) mInflater.inflate(R.layout.setting_item_app_start, null);
+		gearAppStartCheck = (CheckBox)gearAppStartSettingView.findViewById(R.id.appStartCheckBox);
+		if(gearAppStartSettingStatus.equals(GlobalConstant.KEY_STATUS_SET)){
+			gearAppStartCheck.setChecked(true);
+		}
+		else{
+			gearAppStartCheck.setChecked(false);
+		}
+		gearAppStartCheck.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				if(gearAppStartCheck.isChecked()){
+					Toast.makeText(getBaseContext(), "Activated", Toast.LENGTH_LONG).show();
+					editor.putString(GlobalConstant.KEY_GEAR_APP_START_EMERGENCY, GlobalConstant.KEY_STATUS_SET);
+				
+					myIntent = new Intent(EmergencyBoard.this, TrackMeService.class);
+					pendingIntent = PendingIntent.getService(EmergencyBoard.this, 0,myIntent, 0);
+					alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+					Calendar calendar = Calendar.getInstance();
+					calendar.setTimeInMillis(System.currentTimeMillis());
+					calendar.add(Calendar.SECOND, 5);
+					alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+					
+				}else{
+					Toast.makeText(getBaseContext(), "Deactivated", Toast.LENGTH_LONG).show();
+					editor.putString(GlobalConstant.KEY_GEAR_APP_START_EMERGENCY, GlobalConstant.KEY_STATUS_NOT_SET);
+				}
+				editor.commit();
+			}
+		});
+		ViewItem gearAppStartSettingItem = new ViewItem(gearAppStartSettingView);
+		settingsList.addViewItem(gearAppStartSettingItem);
+		
 		settingsList.addBasicItem("Shake Settings to send emergency SMS from your mobile");
 		
 		settingsList.addBasicItem("Create an emergency shortcut to send emergency SMS from your mobile");
@@ -131,11 +179,11 @@ public class EmergencyBoard extends Activity {
 
 		@Override
 		public void onClick(int index) {
-			if(index==0){
+			if(index==1){
 				Intent in = new Intent(getApplicationContext(), EmergencyShakeSetting.class);
 				startActivity(in);
 			}
-			else if(index==1)
+			else if(index==2)
 			{
 				Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
 		        shortcutIntent.setClassName("com.omelet.shadowfriends.emergency", "com.omelet.shadowfriends.emergency.EmergencySMSFromShortcut");

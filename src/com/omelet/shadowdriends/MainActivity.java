@@ -27,6 +27,7 @@ import com.omelet.shadowdriends.adapter.NavDrawerListAdapter;
 import com.omelet.shadowdriends.basic.SexualHarrasmentLawActivity;
 import com.omelet.shadowdriends.createpack.CreateWalkWithMeAcrivity;
 import com.omelet.shadowdriends.createpack.DangerMapAcrivity;
+import com.omelet.shadowdriends.createpack.ShowTrackMeAcrivity;
 import com.omelet.shadowdriends.createpack.ShowWalkWithMeAcrivity;
 import com.omelet.shadowdriends.emergency.EmergencyBoard;
 import com.omelet.shadowdriends.model.NavDrawerItem;
@@ -95,6 +96,9 @@ public class MainActivity extends FragmentActivity {
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[8], navMenuIcons.getResourceId(8, -1)));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[9], navMenuIcons.getResourceId(9, -1)));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[10], navMenuIcons.getResourceId(10, -1)));
+
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[11], navMenuIcons.getResourceId(11, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[12], navMenuIcons.getResourceId(12, -1)));
 		
 
 		// Recycle array
@@ -217,6 +221,8 @@ public class MainActivity extends FragmentActivity {
 			fragmentID = 1;
 			break;
 		case 2:
+			in = new Intent(getApplicationContext(), SearchActivity.class);
+			startActivity(in);
 			fragmentID = 2;
 			break;
 		case 3:
@@ -231,7 +237,7 @@ public class MainActivity extends FragmentActivity {
 			break;
 		
 		case 5:
-			in = new Intent(getApplicationContext(), GCMRegisterActivity.class);
+			in = new Intent(getApplicationContext(), ShowTrackMeAcrivity.class);
 			startActivity(in);
 			fragmentID = 4;
 			break;
@@ -261,6 +267,18 @@ public class MainActivity extends FragmentActivity {
 			break;
 		
 		case 10:
+			in = new Intent(getApplicationContext(), FirActivity.class);
+			startActivity(in);
+			fragmentID = 4;
+			break;
+		
+		case 11:
+			in = new Intent(getApplicationContext(), ServeyActivity.class);
+			startActivity(in);
+			fragmentID = 4;
+			break;
+			
+		case 12:
 			fragmentID = 5;
 			mSimpleFacebook.logout(onLogoutListener);
 			

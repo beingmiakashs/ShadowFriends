@@ -56,7 +56,7 @@ public class FrontEmergencyActivity extends Activity {
 		String message = "I need Emergency help. My approximate location is, Latitude : "+GlobalLocation.latitude
 		+" and Longitude : "+GlobalLocation.longitude;
 		if(address.length()>1){
-			message += " . Address : "+address;
+			message += " . Address near : "+"Kakrail Mosque";
 		}
 		
 		preferences = PreferenceManager.getDefaultSharedPreferences(getBaseContext());

@@ -7,4 +7,22 @@
     <color name="counter_text_bg">#626262</color>
     <color name="counter_text_color">#c5c4c4</color>
     <color name="black_overlay">#66000000</color>
+    
+     <color name="string_color">    #ff0b84aa</color>
+    <color name="button_color">    #ff0000ff</color>           <!--   blue  -->
+    <color name="back_color">      #ffd0daff</color>
+    <color name="editText_color">  #ff0404FF</color>
+    <color name="Text_color">      #ff000000</color>            <!-- black  -->
+    <color name="Text_white">      #ffffffff</color>            <!-- white  -->
+
+
+
+
+    <color name="white">#ffffff</color>
+    <color name="feed_bg">#d3d6db</color>
+    <color name="feed_item_bg">#ffffff</color>
+    <color name="feed_item_border">#c2c3c8</color>
+    <color name="link">#0a80d1</color>
+    <color name="timestamp">#a0a3a7</color>
+    
 </resources>

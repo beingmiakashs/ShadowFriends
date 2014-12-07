@@ -108,6 +108,13 @@
             android:label="Show Walk With Me"
             android:screenOrientation="portrait" >
         </activity>
+        
+        <activity
+            android:name="com.omelet.shadowdriends.createpack.ShowTrackMeAcrivity"
+            android:label="Tracking My Friend"
+            android:screenOrientation="portrait" >
+        </activity>
+        
         <activity
             android:name="com.omelet.shadowdriends.createpack.DangerMapAcrivity"
             android:label="Danger Map"
@@ -116,6 +123,12 @@
         <activity
             android:name="com.omelet.shadowdriends.createpack.SubmitWalkWithMe"
             android:label="Walk With Me Request"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <activity
+            android:name="com.omelet.shadowdriends.FirActivity"
+            android:label="FIR INFO"
             android:screenOrientation="portrait" >
         </activity>
         
@@ -157,6 +170,24 @@
             android:configChanges="keyboardHidden|orientation">
         </activity>
         
+        
+        
+         <activity    android:name=".SearchActivity"
+                     android:label="@string/app_name" />
+
+
+        <activity    android:name=".PostActivity"
+                     android:label="@string/app_name" />
+
+ <activity    android:name=".ServeyActivity"
+                     android:label="@string/app_name" />
+        
+
+        <!--- Look this activity is in another package.  So, we need to add search_action  -->
+        <activity    android:name=".PostDetailsActivity"
+                     android:label="@string/app_name" />
+        
+        
         <service android:name="com.omelet.shadowdriends.emergency.StepService"
                          android:enabled="true" 
                          android:exported="true">
@@ -176,6 +207,8 @@
                 </category>
             </intent-filter>
         </receiver>
+        
+        <service android:name="com.purity.hajjwizard.track.TrackMeService" />
         
         <!-- GCM Activity -->
         

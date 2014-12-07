@@ -69,7 +69,7 @@ import com.omelet.shadowfriends.util.JSONParser;
 import com.omelet.shadowfriends.util.Network;
 import com.omelet.shadowfriends.util.OnTaskCompleted;
 
-public class ShowWalkWithMeAcrivity extends FragmentActivity {
+public class ShowTrackMeAcrivity extends FragmentActivity {
 
 	private GoogleMap googleMap;
 	private GPSTracker gps;
@@ -97,7 +97,7 @@ public class ShowWalkWithMeAcrivity extends FragmentActivity {
 		netCheck = new Network(this);
 		boolean networkStatus = netCheck.isNetworkConnected();
 		
-				if (networkStatus == false) {
+		if (networkStatus == false) {
 			setContentView(R.layout.no_internet);
 			ImageButton img = (ImageButton) findViewById(R.id.internet_setting);
 			img.setOnClickListener(new View.OnClickListener() {
@@ -197,7 +197,7 @@ public class ShowWalkWithMeAcrivity extends FragmentActivity {
 		protected void onPreExecute() {
 			super.onPreExecute();
 
-			gps = new GPSTracker(ShowWalkWithMeAcrivity.this);
+			gps = new GPSTracker(ShowTrackMeAcrivity.this);
 		}
 
 		/**
@@ -299,7 +299,7 @@ public class ShowWalkWithMeAcrivity extends FragmentActivity {
 		@Override
 		protected void onPreExecute() {
 			super.onPreExecute();
-			pDialog = new ProgressDialog(ShowWalkWithMeAcrivity.this);
+			pDialog = new ProgressDialog(ShowTrackMeAcrivity.this);
 			pDialog.setMessage("Getting walk with me request. Please wait...");
 			pDialog.setIndeterminate(false);
 			pDialog.setCancelable(true);
@@ -318,8 +318,8 @@ public class ShowWalkWithMeAcrivity extends FragmentActivity {
 			params.add(new BasicNameValuePair("userid", preferences.getString(GlobalConstant.USER_ID, "")));
 			params.add(new BasicNameValuePair("access_token", preferences.getString(GlobalConstant.LOGIN_ACCESSTOKEN, "")));
 			Log.d("access",preferences.getString(GlobalConstant.LOGIN_ACCESSTOKEN, ""));
-			jParser = new JSONParser(ShowWalkWithMeAcrivity.this);
-			json = jParser.makeHttpRequest("http://www.omleteit.com/apps/shadow/Facebook_list.php", "GET",
+			jParser = new JSONParser(ShowTrackMeAcrivity.this);
+			json = jParser.makeHttpRequest("http://www.omleteit.com/apps/shadow/getFriendLocation.php", "GET",
 					params);
 			Log.d("All walk with me: ", json.toString());
 			
@@ -345,11 +345,10 @@ public class ShowWalkWithMeAcrivity extends FragmentActivity {
 			                for (int i = 0; i < packs.length(); i++) {
 			                    JSONObject nearItem = packs.getJSONObject(i);
 			                    
-			                    Log.d("destination",nearItem.getDouble("DesLat")+" "+ nearItem.getDouble("DesLng"));
+			                    Log.d("destination",nearItem.getDouble("lat")+" "+ nearItem.getDouble("lng"));
 			                    
-			                    createMarker(new LatLng(nearItem.getDouble("StartLat"), nearItem.getDouble("StartLng")), nearItem.getString("NAME")+" : "+nearItem.getString("Title"), 1);
-			                    createMarker(new LatLng(nearItem.getDouble("DesLat"), nearItem.getDouble("DesLng")), nearItem.getString("NAME")+" : "+nearItem.getString("Title"), 2);
-			                }
+			                    createMarker(new LatLng(nearItem.getDouble("lat"), nearItem.getDouble("lng")), nearItem.getString("NAME"), 1);
+			                 }
 			            }
 			            else{
 			            	isSuccess = false;

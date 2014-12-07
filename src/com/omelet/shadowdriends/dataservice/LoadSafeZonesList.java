@@ -102,7 +102,7 @@ public class LoadSafeZonesList extends AsyncTaskLoader<DataHandler> {
 	        params.add(new BasicNameValuePair("type", "14"));
 	        params.add(new BasicNameValuePair("Latitude", String.valueOf(sourceLat)));
 	        params.add(new BasicNameValuePair("Longitude", String.valueOf(sourceLon)));
-	        params.add(new BasicNameValuePair("Radious", "10000"));
+	        params.add(new BasicNameValuePair("Radious", "1000"));
 	        jParser = new JSONParser(mContext);
 	        JSONObject json = jParser.makeHttpRequest(urlToGetAllPacks, "GET", params);
 	        Log.d("All packs: ", json.toString());
