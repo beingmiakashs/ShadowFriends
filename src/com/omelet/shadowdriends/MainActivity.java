@@ -24,6 +24,7 @@ import android.widget.ListView;
 
 import com.omelet.shadowdriends.R;
 import com.omelet.shadowdriends.adapter.NavDrawerListAdapter;
+import com.omelet.shadowdriends.basic.SexualHarrasmentLawActivity;
 import com.omelet.shadowdriends.createpack.CreateWalkWithMeAcrivity;
 import com.omelet.shadowdriends.createpack.DangerMapAcrivity;
 import com.omelet.shadowdriends.createpack.ShowWalkWithMeAcrivity;
@@ -90,6 +91,9 @@ public class MainActivity extends FragmentActivity {
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[5], navMenuIcons.getResourceId(5, -1)));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[6], navMenuIcons.getResourceId(6, -1)));
 		navDrawerItems.add(new NavDrawerItem(navMenuTitles[7], navMenuIcons.getResourceId(7, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[8], navMenuIcons.getResourceId(8, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[9], navMenuIcons.getResourceId(9, -1)));
+		navDrawerItems.add(new NavDrawerItem(navMenuTitles[10], navMenuIcons.getResourceId(10, -1)));
 		
 
 		// Recycle array
@@ -230,10 +234,27 @@ public class MainActivity extends FragmentActivity {
 			startActivity(in);
 			fragmentID = 4;
 			break;
-		
+			
 		case 7:
+			in = new Intent(getApplicationContext(), VoiceRecorderActivity.class);
+			startActivity(in);
+			fragmentID = 4;
+			break;
+		
+		case 8:
+			in = new Intent(getApplicationContext(), GraphActivity.class);
+			startActivity(in);
+			fragmentID = 4;
+			break;
+			
+		case 9:
+			in = new Intent(getApplicationContext(), SexualHarrasmentLawActivity.class);
+			startActivity(in);
+			fragmentID = 4;
+			break;
+		
+		case 10:
 			fragmentID = 5;
-
 			mSimpleFacebook.logout(onLogoutListener);
 			
 			break;

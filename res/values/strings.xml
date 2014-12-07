@@ -18,17 +18,23 @@
         <item >Walk With Me</item>
         <item >Track Me</item>
         <item >Emergency</item>
+        <item >Evidence</item>
+        <item >Harassment Statistics</item>
+        <item >Basic Info</item>
         <item >Logout</item>
     </string-array>
     
     <!-- List Item Icons(Images) with strings(text of company name) -->
     <array name="nav_drawer_icons">
-        <item>@drawable/icon_home</item>
+        <item>@drawable/safe_zone</item>
         <item>@drawable/danger</item>
         <item>@drawable/raise</item>
         <item>@drawable/wwm</item>
         <item>@drawable/wwm</item>
         <item>@drawable/track</item>
+        <item>@drawable/emergency_d</item>
+        <item>@drawable/emergency_d</item>
+        <item>@drawable/emergency_d</item>
         <item>@drawable/emergency_d</item>
         <item>@drawable/logout</item>
     </array>
