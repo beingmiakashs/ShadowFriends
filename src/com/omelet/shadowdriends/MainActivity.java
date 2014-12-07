@@ -1,4 +1,4 @@
-package com.omelet.shadowfriends;
+package com.omelet.shadowdriends;
 
 import java.util.ArrayList;
 
@@ -27,8 +27,8 @@ import com.omelet.shadowdriends.adapter.NavDrawerListAdapter;
 import com.omelet.shadowdriends.createpack.CreateWalkWithMeAcrivity;
 import com.omelet.shadowdriends.createpack.DangerMapAcrivity;
 import com.omelet.shadowdriends.createpack.ShowWalkWithMeAcrivity;
+import com.omelet.shadowdriends.emergency.EmergencyBoard;
 import com.omelet.shadowdriends.model.NavDrawerItem;
-import com.omelet.shadowfriends.emergency.EmergencyBoard;
 import com.omelet.shadowfriends.util.GlobalConstant;
 import com.sromku.simple.fb.Permission;
 import com.sromku.simple.fb.SimpleFacebook;

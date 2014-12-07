@@ -1,4 +1,4 @@
-package com.omelet.shadowfriends.emergency;
+package com.omelet.shadowdriends.emergency;
 
 
 import java.io.IOException;

@@ -6,6 +6,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="description_list_icon">Item Icon</string>
     <string name="str_atv_places">Enter place</string>
+    <string name="sensitivity">Sensitivity\n(lower = more sensitive)</string>
     
     <string name="app_id">1397110090516441</string>
     

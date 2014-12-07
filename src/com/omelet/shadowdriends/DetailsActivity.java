@@ -1,4 +1,4 @@
-package com.omelet.shadowfriends;
+package com.omelet.shadowdriends;
 
 import java.io.IOException;
 import java.util.ArrayList;

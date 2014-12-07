@@ -1,4 +1,4 @@
-package com.omelet.shadowfriends;
+package com.omelet.shadowdriends;
 
 import android.app.Activity;
 import android.content.Intent;

@@ -9,11 +9,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.omelet.shadowdriends.DetailsActivity;
 import com.omelet.shadowdriends.adapter.PacksListAdapter;
 import com.omelet.shadowdriends.location.GPSTracker;
 import com.omelet.shadowdriends.location.GlobalLocation;
 import com.omelet.shadowdriends.model.PackItem;
-import com.omelet.shadowfriends.DetailsActivity;
 import com.omelet.shadowfriends.util.JSONParser;
 
 import android.app.Activity;

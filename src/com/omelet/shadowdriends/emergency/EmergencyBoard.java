@@ -1,6 +1,7 @@
-package com.omelet.shadowfriends.emergency;
+package com.omelet.shadowdriends.emergency;
 
 import com.omelet.shadowdriends.R;
+import com.omelet.shadowdriends.createpack.ShowWalkWithMeAcrivity;
 import com.omelet.shadowfriends.util.GlobalConstant;
 
 import br.com.dina.ui.model.ViewItem;
@@ -130,7 +131,11 @@ public class EmergencyBoard extends Activity {
 
 		@Override
 		public void onClick(int index) {
-			if(index==1)
+			if(index==0){
+				Intent in = new Intent(getApplicationContext(), EmergencyShakeSetting.class);
+				startActivity(in);
+			}
+			else if(index==1)
 			{
 				Intent shortcutIntent = new Intent(Intent.ACTION_MAIN);
 		        shortcutIntent.setClassName("com.omelet.shadowfriends.emergency", "com.omelet.shadowfriends.emergency.EmergencySMSFromShortcut");
