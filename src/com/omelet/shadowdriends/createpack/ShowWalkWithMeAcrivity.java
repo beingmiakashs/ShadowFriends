@@ -347,8 +347,10 @@ public class ShowWalkWithMeAcrivity extends FragmentActivity {
 			                for (int i = 0; i < packs.length(); i++) {
 			                    JSONObject nearItem = packs.getJSONObject(i);
 			                    
+			                    Log.d("destination",nearItem.getDouble("DesLat")+" "+ nearItem.getDouble("DesLng"));
+			                    
 			                    createMarker(new LatLng(nearItem.getDouble("StartLat"), nearItem.getDouble("StartLng")), nearItem.getString("NAME")+" : "+nearItem.getString("Title"), 1);
-			                    createMarker(new LatLng(nearItem.getDouble("DesLat"), nearItem.getDouble("DesLng")), nearItem.getString("NAME")+" : "+nearItem.getString("Title"), 1);
+			                    createMarker(new LatLng(nearItem.getDouble("DesLat"), nearItem.getDouble("DesLng")), nearItem.getString("NAME")+" : "+nearItem.getString("Title"), 2);
 			                }
 			            }
 			            else{

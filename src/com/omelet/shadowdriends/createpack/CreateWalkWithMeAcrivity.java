@@ -198,7 +198,7 @@ public class CreateWalkWithMeAcrivity extends FragmentActivity implements
 								i.putExtra(GlobalConstant.TAG_SENDER_LAT, pickupLat);
 								i.putExtra(GlobalConstant.TAG_SENDER_LON, pickupLon);
 								i.putExtra(GlobalConstant.TAG_RECEIVER_LAT, destinationLat);
-								i.putExtra(GlobalConstant.TAG_RECEIVER_LON, destinationLat);
+								i.putExtra(GlobalConstant.TAG_RECEIVER_LON, destinationLon);
 								Log.d("intent data", pickupLat+" "+pickupLon+" "+destinationLat+" "+destinationLon);
 								startActivity(i);
 								finish();

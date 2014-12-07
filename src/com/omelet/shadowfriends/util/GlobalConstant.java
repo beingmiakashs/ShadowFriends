@@ -50,6 +50,24 @@ public final class GlobalConstant {
 	public static final String ACTION_UPDATE = "ACTION_UPDATE";
 	public static final String ACTION_ASSIGN_CARRIER = "ACTION_ASSIGN_CARRIER";
 	
+	public static final String KEY_STATUS_SET = "set";
+	public static final String KEY_STATUS_NOT_SET = "not_set";
+	
+	public static final String KEY_EMERGENCY_CONTACT = "EMERGENCY_CONTACT_";
+	public static final String KEY_EMERGENCY_CONTACT_NAME = "EMERGENCY_CONTACT_NAME_";
+	public static final String KEY_EMERGENCY_CONTACT_NUMBER = "EMERGENCY_CONTACT_NUMBER_";
+	
+	public static final String KEY_GEAR_APP_START_EMERGENCY = "GEAR_APP_START_EMERGENCY";
+	public static final String KEY_GEAR_APP_BUTTON_PRESS_START = "GEAR_APP_BUTTON_PRESS_START";
+
+	public static final String KEY_GEAR_APP_BUTTON_PRESS_EVENT = "GearAppButtonClickEvent";
+	public static final String KEY_GEAR_APP_START_EVENT = "GearAppStartEvent";
+	
+	public static final String KEY_GEAR_APP_STOP_EVENT = "gear_app_stop_event";
+	
+	public static final String KEY_EMERGENCY_WHISTLE = "emergency_whistle";
+	public static final String KEY_EMERGENCY_LIGHT = "emergency_light";
+	
 	public static void showMessage(final Context context, final String message){
 		((Activity)context).runOnUiThread(new Runnable() {
 			@Override

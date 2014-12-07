@@ -28,6 +28,7 @@ import com.omelet.shadowdriends.createpack.CreateWalkWithMeAcrivity;
 import com.omelet.shadowdriends.createpack.DangerMapAcrivity;
 import com.omelet.shadowdriends.createpack.ShowWalkWithMeAcrivity;
 import com.omelet.shadowdriends.model.NavDrawerItem;
+import com.omelet.shadowfriends.emergency.EmergencyBoard;
 import com.omelet.shadowfriends.util.GlobalConstant;
 import com.sromku.simple.fb.Permission;
 import com.sromku.simple.fb.SimpleFacebook;
@@ -223,7 +224,14 @@ public class MainActivity extends FragmentActivity {
 			startActivity(in);
 			fragmentID = 4;
 			break;
-		case 5:
+		
+		case 6:
+			in = new Intent(getApplicationContext(), EmergencyBoard.class);
+			startActivity(in);
+			fragmentID = 4;
+			break;
+		
+		case 7:
 			fragmentID = 5;
 
 			mSimpleFacebook.logout(onLogoutListener);

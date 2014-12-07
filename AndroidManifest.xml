@@ -84,8 +84,20 @@
         </activity>
         <activity
             android:name="com.omelet.shadowdriends.createpack.SubmitWalkWithMe"
-            android:label="New Pack"
+            android:label="Walk With Me Request"
             android:screenOrientation="portrait" >
+        </activity>
+        
+        <activity
+            android:name="com.omelet.shadowfriends.emergency.EmergencyBoard"
+            android:exported="true"
+            android:configChanges="orientation|keyboardHidden" >
+        </activity>
+        
+        <activity
+            android:name="com.omelet.shadowfriends.emergency.EmergencySMSFromShortcut"
+            android:exported="true"
+            android:configChanges="orientation|keyboardHidden" >
         </activity>
         
         <!-- Facebook function -->
